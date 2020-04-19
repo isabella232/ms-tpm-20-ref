@@ -104,9 +104,6 @@
 #ifndef RH_ACT_1
 #define RH_ACT_1                        NO
 #endif
-#ifndef RH_ACT_A
-#define RH_ACT_A                        YES
-#endif
 
 // Table 0:7 - Defines for Implementation Values
 #ifndef FIELD_UPGRADE_IMPLEMENTED
