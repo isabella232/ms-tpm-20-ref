@@ -1,0 +1,150 @@
+TYPOS
+
+OSSL Support
+  - Remove OSSL Deprecated function
+  - Function not even necessary
+
+MAX/MIN macros:
+  - MinMax.h defines them
+  - LibSupport.h undefines them
+  - GpMacros.h redefines them
+
+Unused GpMacros.h:
+  - TEST(), TEST_HASH()
+  - NO_LONGJMP, FAIL_RETURN, TPM_FAIL_RETURN, REQUIRE, PARAMETER_CHECK
+  - IsOdd
+  - CONTEXT_HASH_ALGORITHM defines are slightly wrong
+
+Unused CompilerDependencies.h:
+  - SOCKET
+  - _INTPTR
+
+Duplicate GpMacros.h / CompilerDependencies.h:
+  - LIB_EXPORT/LIB_IMPORT
+  - NORETURN
+  - NOT_REFERENCED
+
+Document Defines:
+  - TEST_SELF_TEST (not used?)
+  - EMPTY_ASSERT
+  - PROFILE
+
+What should we set for these?
+  - LIBRARY_COMPATIBILITY_CHECK
+  - FIPS_COMPLIANT
+  - COMPILER_CHECKS=DEBUG
+  - ACCUMULATE_SELF_HEAL_TIMER
+  - USE_SPEC_COMPLIANT_PROOFS
+  - CERTIFYX509_DEBUG=DEBUG
+  - Use table driven for both? (should instrument)
+  - USE_MARSHALING_DEFINES
+  - CRT_FORMAT_RSA
+  - USE_BN_ECC_DATA
+
+Debug Defines:
+  - NDEBUG should determine DEBUG
+  - FAIL_TRACE
+  - SIEVE_DEBUG
+  - OSSL_DEBUG
+  - DEBUG_ECC_ENCRYPT
+  - CERTIFYX509_DEBUG
+  - USE_DEBUG_RNG / DRBG_DEBUG_PRINT
+
+Global.h
+  - CryptTest.h included twice
+CryptRand.h
+  - s_random seems unused
+TpmProfile.h
+  - Don't default to having ALG_CAMELLIA on (see SM4 changes)
+CryptHash.c
+  - HASH_DEF NULL_Def = {{0}};
+InternalRoutines:
+  - "CryptSym_fp.h" included twice
+CommandDispatcher.c
+  - "CommandDispatchData.h" vs "Commands.h"
+  - TEST_COMMAND
+  - NEW_CC
+  - Commented out code?
+RsaKeyCache_fp.h
+  - Should actually be used
+CryptEccData.c
+  - Extern definition in CryptEcc.h
+  - Only thing that matters is the eccCurves array
+  - Weird comma define
+
+#if 1
+  - AC_spt.c (some simulated AC data), Are we using fake AC data in prod?
+  - TableDirvenMarshal.c (for some unused function that's now a macro)
+#if 0
+  - CryptUtil.c
+  - TableDirvenMarshal.c
+  - Object_spt.c (check all the ?? code)
+  - PropertyCap.c
+
+Manufacturing:
+  - Added REMANUFACTURE build flag
+  - Should we check errors in TPM_Manufacture?
+
+Funny comments:
+  - BLEH (CryptHash_fp.h)
+  - "Easy peasy, Joe."
+
+g_forcefailure?
+
+Implementation.h
+  - Remove all references
+
+Textual Inclusion:
+  - _X509_SPT_
+  - GLOBAL_C
+  - TPM_FAIL_C
+
+Tpm.h
+  - TpmBuildSwitches.h
+    - CompilerDependencies.h
+  - BaseTypes.h
+    - needs stdint
+  - TPMB.h
+    - needs BaseTypes.h
+  - MinMax.h
+  - TpmProfile.h
+  - TpmAlgorithmDefines.h
+    - Needs previous includes
+  - LibSupport.h
+    - Ossl/TpmToOsslHash.h
+    - Ossl/TpmToOsslSym.h
+    - Ends up including all the openssl code
+  - GpMacros.h
+    - swap.h
+    - VendorString.h
+  - Global.h
+    - Capabilities.h
+    - TpmTypes.h
+    - CommandAttributes.h
+    - CryptTest.h
+    - BnValues.h
+      - Ossl/TpmToOsslMath.h
+    - CryptHash.h
+    - CryptSym.h
+    - CryptRand.h
+    - CryptEcc.h/CryptRand.h
+    - TpmError.h
+    - NV.h
+    - Act.h
+    - Global.c
+      - OIDs.h / X509.h
+        - TpmASN1.h
+  - InternalRoutines.h
+    Actually used via macros and crypt code:
+      - support/TpmFail.c
+      - support/Memory.c
+      - support/Bits.c
+      - support/MathOnByteBuffers.c
+      - crypt/BnMath.c
+      - crypt/BnMemory.c
+      - crypt/BnConvert.c
+      - crypt/CryptEccMain.c
+      - crypt/CryptHash.c
+      - crypt/CryptRand.c
+      - crypt/CryptEccSignature.c
+      - PRNG_TestVectors.h

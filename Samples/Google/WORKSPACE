@@ -1,0 +1,8 @@
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
+    name = "boringssl",
+    commit = "bdbe37905216bea8dd4d0fdee93f6ee415d3aa15",
+    remote = "https://boringssl.googlesource.com/boringssl",
+    shallow_since = "1606944603 +0000",
+)

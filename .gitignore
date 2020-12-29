@@ -299,6 +299,9 @@ TPMCmd/OsslInclude/*
 TPMCmd/WolfDebug/*
 TPMCmd/WolfRelease/*
 
+# Bazel build symlinks
+**/bazel-*
+
 # Linux build files
 .deps/
 .dirstamp
