@@ -316,11 +316,13 @@ TpmFailureMode(
             // Note: this behavior is not required by the specification and it is
             // OK to leave the TPM permanently bricked due to an unrecoverable NV
             // error.
+#if REMANUFACTURE
             if(count == 0 && pt == 0 && s_failCode == FATAL_ERROR_NV_UNRECOVERABLE)
             {
                 g_manufactured = FALSE;
                 TPM_Manufacture(0);
             }
+#endif // REMANUFACTURE
             if(count > 0)
                 count = 1;
             else if(pt > TPM_PT_FIRMWARE_VERSION_2)

@@ -67,11 +67,14 @@
 #include "Locality_fp.h"
 #include "PP_fp.h"
 #include "CommandAudit_fp.h"
-#include "Manufacture_fp.h"
 #include "Handle_fp.h"
 #include "Power_fp.h"
 #include "Response_fp.h"
 #include "CommandDispatcher_fp.h"
+
+#if REMANUFACTURE
+#   include "Manufacture_fp.h"
+#endif
 
 #ifdef CC_AC_Send
 #   include "AC_spt_fp.h"

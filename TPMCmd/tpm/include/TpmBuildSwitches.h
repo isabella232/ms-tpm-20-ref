@@ -335,6 +335,13 @@
 #   define  TABLE_DRIVEN_MARSHAL NO  // Default: Either YES or NO
 #endif
 
+// This define is used to control the ability to re-manufacture the TPM after
+// encoutering an unrecoverable NV read error, via TPM2_GetCapability().
+#if !(defined REMANUFACTURE) || ((REMANUFACTURE != NO) && (REMANUFACTURE != YES))
+#   undef   REMANUFACTURE
+#   define  REMANUFACTURE YES  // Default: Either YES or NO
+#endif
+
 // Change these definitions to turn all algorithms or commands ON or OFF. That is,
 // to turn all algorithms on, set ALG_NO to YES. This is mostly useful as a debug
 // feature.
