@@ -64,10 +64,14 @@
         int neg;                    /* one if the number is negative */
         int flags;
     };
-#else
-#   define EC_POINT_get_affine_coordinates EC_POINT_get_affine_coordinates_GFp
-#   define EC_POINT_set_affine_coordinates EC_POINT_set_affine_coordinates_GFp
 #endif // OPENSSL_VERSION_NUMBER
+
+#ifndef EC_POINT_get_affine_coordinates
+#define EC_POINT_get_affine_coordinates EC_POINT_get_affine_coordinates_GFp
+#endif
+#ifndef EC_POINT_set_affine_coordinates
+#define EC_POINT_set_affine_coordinates EC_POINT_set_affine_coordinates_GFp
+#endif
 
 #include <openssl/bn.h>
 
