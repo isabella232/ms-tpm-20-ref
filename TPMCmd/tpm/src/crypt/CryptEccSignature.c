@@ -67,6 +67,8 @@ EcdsaDigest(
     return bnD;
 }
 
+#if ALG_ECDAA || ALG_ECSCHNORR
+
 //*** BnSchnorrSign()
 // This contains the Schnorr signature computation. It is used by both ECDSA and
 // Schnorr signing. The result is computed as: ['s' = 'k' + 'r' * 'd' (mod 'n')]
@@ -105,6 +107,7 @@ BnSchnorrSign(
     BnDiv(NULL, bnS, bnT1, bnN);
     return (BnEqualZero(bnS)) ? TPM_RC_NO_RESULT : TPM_RC_SUCCESS;
 }
+#endif // ALG_ECDAA || ALG_ECSCHNORR
 
 //** Signing Functions
 
