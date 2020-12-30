@@ -518,6 +518,7 @@ _plat__Fail(
 );
 
 
+#ifdef VENDOR_PERMANENT
 //** From Unique.c
 
 //** _plat__GetUnique()
@@ -534,5 +535,6 @@ _plat__GetUnique(
     uint32_t             bSize,         // size of the buffer
     unsigned char       *b              // output buffer
 );
+#endif // VENDOR_PERMANENT
 
 #endif  // _PLATFORM_FP_H_

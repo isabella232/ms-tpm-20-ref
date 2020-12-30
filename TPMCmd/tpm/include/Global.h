@@ -656,6 +656,7 @@ EXTERN BOOL             g_nvOk;
 // so that its value remains consistent during the command execution
 EXTERN TPM_RC           g_NvStatus;
 
+#ifdef VENDOR_PERMANENT
 //*** g_platformUnique
 // This location contains the unique value(s) used to identify the TPM. It is
 // loaded on every _TPM2_Startup()
@@ -670,6 +671,7 @@ EXTERN TPM_RC           g_NvStatus;
 EXTERN TPM2B_AUTH       g_platformUniqueAuthorities; // Reserved for RNG
 
 EXTERN TPM2B_AUTH       g_platformUniqueDetails;   // referenced by VENDOR_PERMANENT
+#endif // VENDOR_PERMANENT
 
 //*********************************************************************************
 //*********************************************************************************
