@@ -47,7 +47,7 @@
 // Instance each of the hash descriptors based on the implemented algorithms
 FOR_EACH_HASH(HASH_DEF_TEMPLATE)
 // Instance a 'null' def.
-HASH_DEF NULL_Def = {{0}};
+HASH_DEF NULL_Def = {0};
 
 // Create a table of pointers to the defined hash definitions
 #define HASH_DEF_ENTRY(HASH, Hash)     &Hash##_Def,
