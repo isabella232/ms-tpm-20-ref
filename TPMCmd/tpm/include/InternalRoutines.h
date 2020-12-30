@@ -98,7 +98,6 @@
 #include "CryptRand_fp.h"
 #include "CryptSelfTest_fp.h"
 #include "MathOnByteBuffers_fp.h"
-#include "CryptSym_fp.h"
 #include "AlgorithmTests_fp.h"
 
 #if ALG_RSA
