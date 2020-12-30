@@ -82,10 +82,10 @@ OsslToTpmBn(
     {
         int         i;
     //
-        VERIFY((unsigned)osslBn->top <= BnGetAllocated(bn));
-        for(i = 0; i < osslBn->top; i++)
+        VERIFY((unsigned)osslBn->width <= BnGetAllocated(bn));
+        for(i = 0; i < osslBn->width; i++)
             bn->d[i] = osslBn->d[i];
-        BnSetTop(bn, osslBn->top);
+        BnSetTop(bn, osslBn->width);
     }
     return TRUE;
 Error:
@@ -108,7 +108,7 @@ BigInitialized(
         return NULL;
     toInit->d = (BN_ULONG *)&initializer->d[0];
     toInit->dmax = (int)initializer->allocated;
-    toInit->top = (int)initializer->size;
+    toInit->width = (int)initializer->size;
     toInit->neg = 0;
     toInit->flags = 0;
     return toInit;
@@ -142,7 +142,7 @@ BIGNUM_print(
     }
     if (a->neg)
         printf("-");
-    for(i = a->top, d = &a->d[i - 1]; i > 0; i--)
+    for(i = a->width, d = &a->d[i - 1]; i > 0; i--)
     {
         int         j;
         BN_ULONG    l = *d--;
@@ -202,7 +202,7 @@ MathLibraryCompatibilityCheck(
     // Convert the test data to an OpenSSL BIGNUM
     BN_bin2bn(test, sizeof(test), osslTemp);
     // Make sure the values are consistent
-    VERIFY(osslTemp->top == (int)tpmTemp->size);
+    VERIFY(osslTemp->width == (int)tpmTemp->size);
     for(i = 0; i < tpmTemp->size; i++)
         VERIFY(osslTemp->d[i] == tpmTemp->d[i]);
     OSSL_LEAVE();
