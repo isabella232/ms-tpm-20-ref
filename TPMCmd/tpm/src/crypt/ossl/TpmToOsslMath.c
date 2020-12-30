@@ -591,13 +591,11 @@ BnEccModMult2(
         EC_POINT_mul(E->G, pR, bnD, pQ, bnU, E->CTX);
     else
     {
-        const EC_POINT        *points[2];
-        const BIGNUM          *scalars[2];
-        points[0] = pS;
-        points[1] = pQ;
-        scalars[0] = bnD;
-        scalars[1] = bnU;
-        EC_POINTs_mul(E->G, pR, NULL, 2, points, scalars, E->CTX);
+        EC_POINT *pTemp = EC_POINT_new(E->G);
+        EC_POINT_mul(E->G, pR, NULL, pS, bnD, E->CTX);
+        EC_POINT_mul(E->G, pTemp, NULL, pQ, bnU, E->CTX);
+        EC_POINT_add(E->G, pR, pR, pTemp, E->CTX);
+        EC_POINT_free(pTemp);
     }
     PointFromOssl(R, pR, E);
     EC_POINT_free(pR);
