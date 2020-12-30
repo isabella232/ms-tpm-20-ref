@@ -307,7 +307,7 @@
 #endif
 
 // This bit is used to indicate that an authorization ticket expires on TPM Reset
-// and TPM Restart. It is added to the timeout value returned by TPM2_PoliySigned()
+// and TPM Restart. It is added to the timeout value returned by TPM2_PolicySigned()
 // and TPM2_PolicySecret() and used by TPM2_PolicyTicket(). The timeout value is
 // relative to Time (g_time). Time is reset whenever the TPM loses power and cannot
 // be moved forward by the user (as can Clock). 'g_time' is a 64-bit value expressing

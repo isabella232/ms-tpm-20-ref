@@ -6,7 +6,7 @@ This is the official TCG reference implementation of the [TPM 2.0 Specification]
 
 See the definition of the `SPEC_VERSION`, `SPEC_YEAR` and `SPEC_DAY_OF_YEAR` values in the [TpmTypes.h](TPMCmd/tpm/include/TpmTypes.h) header for the exact revision/date of the TPM 2.0 specification, which the given source tree snapshot corresponds to.
 
-The reference implementation can be directly used via the [TPM 2.0 simulator](TPMCmd/Simulator) that emulates a TPM 2.0 device and can be accessed via a custom TCP based protocol. The simplest way to work with the simulator is to use a [TSS library](https://github.com/Microsoft/TSS.MSR) for the programming language of your choice - C#/.Net, C++, Java, Python, JavaScript/Node.js are currently supported. The C language TSS implementing the TCG's TSS API specifiaction is available [here](https://github.com/tpm2-software/tpm2-tss).
+The reference implementation can be directly used via the [TPM 2.0 simulator](TPMCmd/Simulator) that emulates a TPM 2.0 device and can be accessed via a custom TCP based protocol. The simplest way to work with the simulator is to use a [TSS library](https://github.com/Microsoft/TSS.MSR) for the programming language of your choice - C#/.Net, C++, Java, Python, JavaScript/Node.js are currently supported. The C language TSS implementing the TCG's TSS API specification is available [here](https://github.com/tpm2-software/tpm2-tss).
 
 ## Windows build ##
 
@@ -18,7 +18,7 @@ Windows build is implemented as a Visual Studio 2017 solution. Before building i
 
    1. Create `TPMCmd/lib` folder and place a static OpenSSL library (`libcrypto.lib`) built for the `x86` architecture there. For the `x64` architecture use the `TPMCmd/lib/x64` folder.
 
-        The static libs can be either static libraries proper, or import libraries accompanying the corresponding DLLs. In the latter case you'll need to ensure that ther is a matching copy of the OpenSSL DLL in the standard Windows search path, so that it is available when you run the simulator executable (e.g. copy it into the same folder where `simulator.exe` is located).
+        The static libs can be either static libraries proper, or import libraries accompanying the corresponding DLLs. In the latter case you'll need to ensure that there is a matching copy of the OpenSSL DLL in the standard Windows search path, so that it is available when you run the simulator executable (e.g. copy it into the same folder where `simulator.exe` is located).
 
         Recommended version of OpenSSL is `1.1.1d` or higher.
 

@@ -41,7 +41,7 @@
 
 //** Functions
 //*** PolicyParameterChecks()
-// This function validates the common parameters of TPM2_PolicySiged()
+// This function validates the common parameters of TPM2_PolicySigned()
 // and TPM2_PolicySecret(). The common parameters are 'nonceTPM',
 // 'expiration', and 'cpHashA'.
 TPM_RC

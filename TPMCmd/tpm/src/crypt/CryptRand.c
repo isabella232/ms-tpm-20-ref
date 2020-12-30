@@ -45,7 +45,7 @@
 // TpmBuildSwitches.h. It is USE_DEBUG_RNG.
 //
 //
-// This is the implementation layer of CTR DRGB mechanism as defined in SP800-90A
+// This is the implementation layer of CTR DRBG mechanism as defined in SP800-90A
 // and the functions are organized as closely as practical to the organization in
 // SP800-90A. It is intended to be compiled as a separate module that is linked
 // with a secure application so that both reside inside the same boundary
@@ -111,7 +111,7 @@ typedef struct
 
 //*** DfCompute()
 // This function does the incremental update of the derivation function state. It
-// encrypts the 'iv' value and XOR's the results into each of the blocks of the
+// encrypts the 'iv' value and XORs the results into each of the blocks of the
 // output. This is equivalent to processing all of input data for each output block.
 static void
 DfCompute(

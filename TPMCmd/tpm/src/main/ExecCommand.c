@@ -181,7 +181,7 @@ ExecuteCommand(
 #if  FIELD_UPGRADE_IMPLEMENTED  == YES
     // If the TPM is in FUM, then the only allowed command is
     // TPM_CC_FieldUpgradeData.
-    if(IsFieldUgradeMode() && (command.code != TPM_CC_FieldUpgradeData))
+    if(IsFieldUpgradeMode() && (command.code != TPM_CC_FieldUpgradeData))
     {
         result = TPM_RC_UPGRADE;
         goto Cleanup;

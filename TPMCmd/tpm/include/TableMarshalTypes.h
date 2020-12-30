@@ -159,14 +159,14 @@ typedef const struct ListMarshal_mst
 
 typedef const struct AttributesMarshal_mst
 {
-    UINT8           unmarashalType;     // ATTRIBUTE_MTYPE
+    UINT8           unmarshalType;      // ATTRIBUTE_MTYPE
     UINT8           modifiers;          // size (ONE_BYTES, TWO_BYTES, or FOUR_BYTES
     UINT32          attributeMask;      // the values that must be zero.
 } AttributesMarshal_mst;
 
 typedef const struct CompositeMarshal_mst
 {
-    UINT8           unmashalType;       // COMPOSITE_MTYPE
+    UINT8           unmarshalType;      // COMPOSITE_MTYPE
     UINT8           modifiers;          // number of entries and size
     marshalIndex_t  types[1];           // array of unmarshaling types
 } CompositeMarshal_mst;

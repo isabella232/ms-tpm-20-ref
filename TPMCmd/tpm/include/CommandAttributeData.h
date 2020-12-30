@@ -37,7 +37,7 @@
  *  Date: Sep  7, 2019  Time: 04:51:22PM
  */
 
-// This file should only be included by CommandCodeAttibutes.c
+// This file should only be included by CommandCodeAttributes.c
 #ifdef _COMMAND_CODE_ATTRIBUTES_
 
 #include "CommandAttributes.h"

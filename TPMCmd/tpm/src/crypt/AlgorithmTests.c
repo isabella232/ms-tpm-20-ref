@@ -505,7 +505,7 @@ TestRsaSignAndVerify(
                                                    &testDigest))
         SELF_TEST_FAILURE;
     // If this is RSAPSS, check the verification with known signature
-    // Have to copy because  CrytpRsaValidateSignature() eats the signature
+    // Have to copy because  CryptRsaValidateSignature() eats the signature
     if(TPM_ALG_RSAPSS == scheme)
     {
         MemoryCopy2B(&testSig.signature.rsapss.sig.b, (P2B)&c_RsapssKvt,

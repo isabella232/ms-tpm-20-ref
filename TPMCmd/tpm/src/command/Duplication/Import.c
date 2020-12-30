@@ -50,7 +50,7 @@
 //                              'parentHandle' does not reference a decryption key; or
 //                              'objectPublic' and 'parentHandle' have incompatible
 //                              or inconsistent attributes; or
-//                              encrytpedDuplication is SET in 'objectPublic' but the
+//                              encryptedDuplication is SET in 'objectPublic' but the
 //                              inner or outer wrapper is missing.
 //                              Note that if the TPM provides parameter values, the
 //                              parameter number will indicate 'symmetricKey' (missing
@@ -166,7 +166,7 @@ TPM2_Import(
     }
     else
     {
-        // If encrytpedDuplication is set, then the object must have an outer
+        // If encryptedDuplication is set, then the object must have an outer
         // wrapper
         if(IS_ATTRIBUTE(attributes, TPMA_OBJECT, encryptedDuplication))
             return TPM_RCS_ATTRIBUTES + RC_Import_inSymSeed;

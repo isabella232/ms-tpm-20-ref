@@ -118,7 +118,7 @@ TpmSizeChecks(
         // determine the amount of data in the encrypted data. That part is not
         // independently sized. This makes the actual size 2 bytes smaller than
         // calculated using Part 2. Since this is opaque to the caller, it is not
-        // necessary to fix. The actual size is returned by TPM2_GetCapabilties().
+        // necessary to fix. The actual size is returned by TPM2_GetCapabilites().
 
         // Initialize output handle.  At the end of command action, the output
         // handle of an object will be replaced, while the output handle
@@ -172,7 +172,7 @@ TpmSizeChecks(
             PASS = FALSE;
         }
     }
-    // Check that the platorm implementes each of the ACT that the TPM thinks are
+    // Check that the platform implements each of the ACT that the TPM thinks are
     // present
     {
         uint32_t            act;

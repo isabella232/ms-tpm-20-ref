@@ -66,7 +66,7 @@ void TDES_encrypt(
 );
 
 //*** TDES_decrypt()
-// As with TDES_encypt() this function bridges between the TPM single schedule
+// As with TDES_encrypt() this function bridges between the TPM single schedule
 // model and the OpenSSL three schedule model.
 void TDES_decrypt(
     const BYTE          *in,

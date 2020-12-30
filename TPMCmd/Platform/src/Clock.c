@@ -192,7 +192,7 @@ _plat__TimerRead(
 #ifdef  DEBUGGING_TIME
     // Put this in so that TPM time will pass much faster than real time when
     // doing debug.
-    // A value of 1000 for DEBUG_TIME_MULTIPLER will make each ms into a second
+    // A value of 1000 for DEBUG_TIME_MULTIPLIER will make each ms into a second
     // A good value might be 100
     return (s_tpmTime * DEBUG_TIME_MULTIPLIER);
 #endif

@@ -37,7 +37,7 @@
  *  Date: Mar  6, 2020  Time: 01:50:09PM
  */
 
-// This file should only be included by CommandCodeAttibutes.c
+// This file should only be included by CommandCodeAttributes.c
 #ifdef _COMMAND_TABLE_DISPATCH_
 
 

@@ -173,7 +173,7 @@ const BYTE bitsInNibble[16] = {
         +   bitsInNibble[((unsigned char)(x) >> 4) & 0xf])
 #endif
 
-//*** BitsInArry()
+//*** BitsInArray()
 // This function counts the number of bits set in an array of bytes.
 static int
 BitsInArray(
@@ -242,7 +242,7 @@ const SIEVE_MARKS sieveMarks[5] = {
 // To get better performance, one could address the issue of developing the
 // composite numbers. When the size of the prime gets large, the time for doing
 // the divisions goes up, noticeably. It could be better to develop larger composite
-// numbers even if they need to be bigNum's themselves. The object would be to
+// numbers even if they need to be bigNums themselves. The object would be to
 // reduce the number of times that the large prime is divided into a few large
 // divides and then use smaller divides to get to the final 16 bit (or smaller)
 // remainders.

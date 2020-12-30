@@ -242,11 +242,11 @@ Error:
 // process executed again with the data going into the buffer. At the end, the data
 // would be in its final resting place.
 
-//*** ASN1InitialializeMarshalContext()
+//*** ASN1InitializeMarshalContext()
 // This creates a structure for handling marshaling of an ASN.1 formatted data
 // structure.
 void
-ASN1InitialializeMarshalContext(
+ASN1InitializeMarshalContext(
     ASN1MarshalContext      *ctx,
     INT16                    length,
     BYTE                    *buffer
@@ -445,7 +445,7 @@ ASN1PushTaggedOctetString(
 )
 {
     ASN1PushBytes(ctx, size, string);
-    // PushTagAndLenght just tells how many octets it added so the total size of this
+    // PushTagAndLength just tells how many octets it added so the total size of this
     // element is the sum of those octets and input size.
     size += ASN1PushTagAndLength(ctx, tag, size);
     return size;
@@ -489,7 +489,7 @@ ASN1PushInteger(
     // if needed, add a leading byte of 0 to make the number positive
     if(*integer & 0x80)
         iLen += (INT16)ASN1PushByte(ctx, 0);
-    // PushTagAndLenght just tells how many octets it added so the total size of this
+    // PushTagAndLength just tells how many octets it added so the total size of this
     // element is the sum of those octets and the adjusted input size.
     iLen +=  ASN1PushTagAndLength(ctx, ASN1_INTEGER, iLen);
     return iLen;

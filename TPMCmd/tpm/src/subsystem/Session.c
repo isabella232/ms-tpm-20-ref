@@ -106,7 +106,7 @@
 
     If a TPM with both 1.2 and 2.0 functionality uses this scheme for both
     1.2 and 2.0 sessions, and the list of active contexts is read with
-    TPM_GetCapabiltiy(), the TPM will create 32-bit representations of the
+    TPM_GetCapability(), the TPM will create 32-bit representations of the
     list that contains 16-bit values (the TPM2_GetCapability() returns a list
     of handles for active sessions rather than a list of contextID).  The full
     contextID has high-order bits that are either the same as the current

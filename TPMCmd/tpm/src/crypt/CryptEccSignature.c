@@ -232,7 +232,7 @@ BnSignEcdaa(
     else
     {
         // This allocation is here because 'r' doesn't have a value until
-        // CrypGenerateR() is done.
+        // CryptGenerateR() is done.
         ECC_INITIALIZED(bnR, &r);
         do
         {

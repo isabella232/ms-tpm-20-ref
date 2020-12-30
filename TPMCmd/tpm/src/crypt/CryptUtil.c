@@ -1143,7 +1143,7 @@ CryptGetSignHashAlg(
 #if ALG_ECC
     // If ECC is defined, ECDSA is mandatory
 #   if !ALG_ECDSA
-#       error "ECDSA is requried for ECC"
+#       error "ECDSA is required for ECC"
 #   endif
         case TPM_ALG_ECDSA:
     // SM2 and ECSCHNORR are optional
@@ -1213,7 +1213,7 @@ CryptIsAsymSignScheme(
             switch(scheme)
             {
 #   if !ALG_RSASSA  || !ALG_RSAPSS
-#       error "RSASSA and PSAPSS required if RSA used."
+#       error "RSASSA and RSAPSS required if RSA used."
 #   endif
                 case TPM_ALG_RSASSA:
                 case TPM_ALG_RSAPSS:

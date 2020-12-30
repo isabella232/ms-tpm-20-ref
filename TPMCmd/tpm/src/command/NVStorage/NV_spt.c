@@ -64,7 +64,7 @@ NvReadAccessChecks(
     // was checked..
     if(authHandle == TPM_RH_OWNER)
     {
-        // If Owner provided authorization then ONWERWRITE must be SET
+        // If Owner provided authorization then OWNERWRITE must be SET
         if(!IS_ATTRIBUTE(attributes, TPMA_NV, OWNERREAD))
             return TPM_RC_NV_AUTHORIZATION;
     }
@@ -112,7 +112,7 @@ NvWriteAccessChecks(
     // was checked..
     if(authHandle == TPM_RH_OWNER)
     {
-        // If Owner provided authorization then ONWERWRITE must be SET
+        // If Owner provided authorization then OWNERWRITE must be SET
         if(!IS_ATTRIBUTE(attributes, TPMA_NV, OWNERWRITE))
             return TPM_RC_NV_AUTHORIZATION;
     }

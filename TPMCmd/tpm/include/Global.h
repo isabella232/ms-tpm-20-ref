@@ -570,7 +570,7 @@ EXTERN  BOOL            g_StartupLocality3;
 
 //***TPM_SU_NONE
 // Part 2 defines the two shutdown/startup types that may be used in
-// TPM2_Shutdown() and TPM2_Starup(). This additional define is
+// TPM2_Shutdown() and TPM2_Startup(). This additional define is
 // used by the TPM to indicate that no shutdown was received.
 // NOTE: This is a reserved value.
 #define SU_NONE_VALUE           (0xFFFF)
@@ -1203,7 +1203,7 @@ EXTERN TPM_HANDLE       s_associatedHandles[MAX_SESSION_NUM];
 // Array of nonces provided by the caller for the corresponding sessions
 EXTERN TPM2B_NONCE      s_nonceCaller[MAX_SESSION_NUM];
 
-// Array of authorization values (HMAC's or passwords) for the corresponding
+// Array of authorization values (HMACs or passwords) for the corresponding
 // sessions
 EXTERN TPM2B_AUTH       s_inputAuthValues[MAX_SESSION_NUM];
 

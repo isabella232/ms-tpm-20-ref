@@ -57,8 +57,8 @@ TPM2_EncryptDecrypt2(
     )
 {
     TPM_RC                result;
-    // EncryptDecyrptShared() performs the operations as shown in
-    // TPM2_EncrypDecrypt
+    // EncryptDecryptShared() performs the operations as shown in
+    // TPM2_EncryptDecrypt
     result = EncryptDecryptShared(in->keyHandle, in->decrypt, in->mode,
                                   &in->ivIn, &in->inData,
                                   (EncryptDecrypt_Out *)out);

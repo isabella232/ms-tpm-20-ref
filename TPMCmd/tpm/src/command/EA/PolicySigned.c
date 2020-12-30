@@ -92,7 +92,7 @@ TPM2_PolicySigned(
         //                  This 32-bit value is set to zero if the expiration
         //                  time is not being set.
         //      cpHashA     hash of the command parameters for the command being
-        //                  approved using the hash algorithm of the PSAP session.
+        //                  approved using the hash algorithm of the PWAP session.
         //                  Set to NULLauth if the authorization is not limited
         //                  to a specific command.
         //      policyRef   hash of an opaque value determined by the authorizing

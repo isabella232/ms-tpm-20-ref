@@ -121,7 +121,7 @@ X509AddSigningAlgorithmRSA(
                                 (INT16)signKey->publicArea.unique.rsa.t.size);
                             ASN1PushUINT(ctx, saltSize);
                         }
-                        ASN1EndEncapsulation(ctx, ASN1_APPLICAIION_SPECIFIC + 2);
+                        ASN1EndEncapsulation(ctx, ASN1_APPLICATION_SPECIFIC + 2);
 
                         // Add the mask generation algorithm
                         // [1] (1 elem)
@@ -146,7 +146,7 @@ X509AddSigningAlgorithmRSA(
                             ASN1EndEncapsulation(ctx, ASN1_CONSTRUCTED_SEQUENCE);
                         }
                         // End the [1]
-                        ASN1EndEncapsulation(ctx, ASN1_APPLICAIION_SPECIFIC + 1);
+                        ASN1EndEncapsulation(ctx, ASN1_APPLICATION_SPECIFIC + 1);
 
                         // Add the hash algorithm
                         // [0] (1 elem)
@@ -158,7 +158,7 @@ X509AddSigningAlgorithmRSA(
                         {
                             X509PushAlgorithmIdentifierSequence(ctx, hashDef->OID);
                         }
-                        ASN1EndEncapsulation(ctx, (ASN1_APPLICAIION_SPECIFIC + 0));
+                        ASN1EndEncapsulation(ctx, (ASN1_APPLICATION_SPECIFIC + 0));
                     }
                     //  SEQUENCE (3 elements) end
                     ASN1EndEncapsulation(ctx, ASN1_CONSTRUCTED_SEQUENCE);

@@ -176,7 +176,7 @@ TPM2_CertifyX509(
 
     // Build the addedToCertificate from the bottom up.
     // Initialize the context structure
-    ASN1InitialializeMarshalContext(&ctxOut, sizeof(out->addedToCertificate.t.buffer),
+    ASN1InitializeMarshalContext(&ctxOut, sizeof(out->addedToCertificate.t.buffer),
                                     out->addedToCertificate.t.buffer);
     // Place a marker for the overall context
     ASN1StartMarshalContext(&ctxOut);  // SEQUENCE for addedToCertificate
@@ -222,7 +222,7 @@ TPM2_CertifyX509(
     ASN1StartMarshalContext(&ctxOut);
     ASN1PushUINT(&ctxOut, 2);
     certTBS[VERSION_REF].len =
-        ASN1EndEncapsulation(&ctxOut, ASN1_APPLICAIION_SPECIFIC);
+        ASN1EndEncapsulation(&ctxOut, ASN1_APPLICATION_SPECIFIC);
     certTBS[VERSION_REF].buf = ctxOut.buffer + ctxOut.offset;
 
     // Create a fake tag and length for the TBS in the space used for

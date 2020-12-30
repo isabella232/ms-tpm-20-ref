@@ -62,7 +62,7 @@
 #   define LIB_IMPORT __declspec(dllimport)
 
 // This is defined to indicate a function that does not return. Microsoft compilers
-// do not support the _Noretrun function parameter.
+// do not support the _Noreturn function parameter.
 #   define NORETURN  __declspec(noreturn)
 #   if _MSC_VER >= 1400     // SAL processing when needed
 #       include <sal.h>

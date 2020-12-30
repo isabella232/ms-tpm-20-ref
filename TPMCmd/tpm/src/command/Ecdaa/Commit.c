@@ -109,7 +109,7 @@ TPM2_Commit(
         // copy y2 for P2
         P2.y = in->y2;
 
-        // Compute x2  HnameAlg(s2) mod p
+        // Compute x2  nameAlg(s2) mod p
         //      do the hash operation on s2 with the size of curve 'p'
         x2.t.size = CryptHashBlock(eccKey->publicArea.nameAlg,
                                      in->s2.t.size,

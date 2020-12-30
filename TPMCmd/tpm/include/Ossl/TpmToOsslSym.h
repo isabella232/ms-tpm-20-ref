@@ -90,8 +90,8 @@
 //  1) keySchedule
 //  2) in buffer
 //  3) out buffer
-// Since open SSL uses the order in encryptoCall_t above, need to swizzle the
-// values to the order required by the library.
+// Since open SSL uses the order in TpmCryptSetSymKeyCall_t above, need to
+// swizzle the values to the order required by the library.
 #define SWIZZLE(keySchedule, in, out)                                               \
     (const BYTE *)(in), (BYTE *)(out), (void *)(keySchedule)
 

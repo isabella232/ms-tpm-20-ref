@@ -652,7 +652,7 @@ PssEncode(
     // Before we mess up the pOut value, set the last byte to 0xbc
     pOut[out->size - 1] = 0xbc;
 
-    // XOR a byte of 0x01 at the position just before where the salt will be XOR'ed
+    // XOR a byte of 0x01 at the position just before where the salt will be XORed
     pOut = &pOut[mLen - saltSize - 1];
     *pOut++ ^= 0x01;
 
@@ -882,7 +882,7 @@ Exit:
 //
 //  Return Type: TPM_RC
 //      TPM_RC_VALUE          decode unsuccessful
-//      TPM_RC_SCHEME        'haslAlg' is not supported
+//      TPM_RC_SCHEME        'hashAlg' is not supported
 //
 static TPM_RC
 RSASSA_Decode(

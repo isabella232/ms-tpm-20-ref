@@ -75,8 +75,8 @@ typedef void(*TpmCryptSetSymKeyCall_t)(
 //  1) keySchedule
 //  2) in buffer
 //  3) out buffer
-// Since wolfcrypt uses the order in encryptoCall_t above, need to swizzle the
-// values to the order required by the library.
+// Since wolfcrypt uses the order in TpmCryptSetSymKeyCall_t above, need to
+// swizzle the values to the order required by the library.
 #define SWIZZLE(keySchedule, in, out)                                   \
     (void *)(keySchedule), (BYTE *)(out), (const BYTE *)(in)
 

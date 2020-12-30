@@ -79,7 +79,7 @@ TPM2_RSA_Encrypt(
         return TPM_RCS_SCHEME + RC_RSA_Encrypt_inScheme;
 
     // Encryption.  TPM_RC_VALUE, or TPM_RC_SCHEME errors my be returned buy
-    // CryptEncyptRSA.
+    // CryptEncryptRSA.
     out->outData.t.size = sizeof(out->outData.t.buffer);
 
     result = CryptRsaEncrypt(&out->outData, &in->message.b, rsaKey, scheme,

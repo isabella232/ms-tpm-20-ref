@@ -59,7 +59,7 @@ CryptRunSelfTests(
 {
     TPM_ALG_ID           alg;
 
-    // For each of the algorithms that are in the toTestVecor, need to run a
+    // For each of the algorithms that are in the toTest vector, need to run a
     // test
     for(alg = TPM_ALG_FIRST; alg <= TPM_ALG_LAST; alg++)
     {

@@ -43,7 +43,7 @@
 // Load an ordinary or temporary object
 */
 //  Return Type: TPM_RC
-//      TPM_RC_ATTRIBUTES       'inPulblic' attributes are not allowed with selected
+//      TPM_RC_ATTRIBUTES       'inPublic' attributes are not allowed with selected
 //                              parent
 //      TPM_RC_BINDING          'inPrivate' and 'inPublic' are not
 //                              cryptographically bound

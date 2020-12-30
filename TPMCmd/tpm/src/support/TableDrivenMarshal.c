@@ -47,7 +47,7 @@ extern UINT16 MarshalLookupTable[];
 
 typedef struct { int a; } External_Structure_t;
 
-extern struct Exernal_Structure_t MarshalData;
+extern struct External_Structure_t MarshalData;
 
 #define IS_SUCCESS(UNMARSHAL_FUNCTION)                                              \
     (TPM_RC_SUCCESS == (result = (UNMARSHAL_FUNCTION)))
@@ -281,7 +281,7 @@ UnmarshalInteger(
     // Check to see if there is enough data to fulfill the request
     if((*size -= bytes) >= 0)
     {
-        // The most comon size
+        // The most common size
         if(bytes == 4)
         {
             *((UINT32 *)target) = (UINT32)((((((_MB_[0] << 8) | _MB_[1]) << 8)
@@ -632,7 +632,7 @@ Unmarshal(
                 {
                     marshalIndex_t  index = m2bst->dataIndex;
                 //
-                    // If this type propigates a null (PROPIGATE_NULL), propigate it
+                    // If this type propagates a null (PROPIGATE_NULL), propigate it
                     if ((m2bst->modifiers & PROPAGATE_NULL)
                         && (typeIndex & typeIndex))
                         index |= NULL_FLAG;
@@ -662,7 +662,7 @@ Unmarshal(
         //
             if(IS_SUCCESS(Unmarshal(mlt->sizeIndex, target, buffer, size)))
             {
-                // If this type propigates a null (PROPIGATE_NULL), propigate it
+                // If this type propagates a null (PROPIGATE_NULL), propigate it
                 if ((mlt->modifiers & PROPAGATE_NULL)
                     && (typeIndex & NULL_FLAG))
                     index |= NULL_FLAG;

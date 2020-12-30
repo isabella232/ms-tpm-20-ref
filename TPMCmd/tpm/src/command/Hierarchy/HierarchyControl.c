@@ -76,7 +76,7 @@ TPM2_HierarchyControl(
             break;
 
         // EhEnable may be disabled if either PlatformAuth/PlatformPolicy or
-        // EndosementAuth/EndorsementPolicy is provided.  If EhEnable is disabled,
+        // EndorsementAuth/EndorsementPolicy is provided.  If EhEnable is disabled,
         // then it may only be enabled if PlatformAuth/PlatformPolicy is
         // provided.
         case TPM_RH_ENDORSEMENT:

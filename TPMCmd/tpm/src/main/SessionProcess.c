@@ -1112,7 +1112,7 @@ CheckPolicyAuthSession(
 // The normal unmarshaling errors are possible.
 //
 //  Return Type: TPM_RC
-//      TPM_RC_SUCCSS       unmarshaled without error
+//      TPM_RC_SUCCESS      unmarshaled without error
 //      TPM_RC_SIZE         the number of bytes unmarshaled is not the same
 //                          as the value for authorizationSize in the command
 //
@@ -1258,7 +1258,7 @@ RetrieveSessionData(
             if(!IS_ATTRIBUTE(sessionAttributes, TPMA_SESSION, auditReset)
                && session->attributes.isAudit == SET)
             {
-                // Not first use or reset. If auditExlusive is SET, then this
+                // Not first use or reset. If auditExclusive is SET, then this
                 // session must be the current exclusive session.
                 if(IS_ATTRIBUTE(sessionAttributes, TPMA_SESSION, auditExclusive)
                    && g_exclusiveAuditSession != s_sessionHandles[sessionIndex])
@@ -1432,7 +1432,7 @@ CheckAuthSession(
     else
     {
         // ... see if the entity has a policy, ...
-        // Note: IsAuthPolicyAvalable will return FALSE if the sensitive area of the
+        // Note: IsAuthPolicyAvailable will return FALSE if the sensitive area of the
         // object is not loaded
         if(!IsAuthPolicyAvailable(associatedHandle, command->index, sessionIndex))
             return TPM_RC_AUTH_UNAVAILABLE;

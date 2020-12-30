@@ -89,11 +89,11 @@ ASN1GetBitStringValue(
     UINT32                      *val
 );
 
-//*** ASN1InitialializeMarshalContext()
+//*** ASN1InitializeMarshalContext()
 // This creates a structure for handling marshaling of an ASN.1 formatted data
 // structure.
 void
-ASN1InitialializeMarshalContext(
+ASN1InitializeMarshalContext(
     ASN1MarshalContext      *ctx,
     INT16                    length,
     BYTE                    *buffer
