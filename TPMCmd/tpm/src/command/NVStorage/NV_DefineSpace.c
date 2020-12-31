@@ -142,7 +142,7 @@ TPM2_NV_DefineSpace(
             if(IS_ATTRIBUTE(attributes, TPMA_NV, CLEAR_STCLEAR))
                 return TPM_RCS_ATTRIBUTES + RC_NV_DefineSpace_publicInfo;
             break;
-#ifdef TPM_NT_PIN_FAIL
+#if CC_PolicySecret == YES && defined TPM_NT_PIN_PASS
         case TPM_NT_PIN_FAIL:
             // NV_NO_DA must be SET and AUTHWRITE must be CLEAR
             // NOTE: As with a PIN_PASS index, the authValue of the index is not
@@ -156,16 +156,15 @@ TPM2_NV_DefineSpace(
             // It is not allowed to create a PIN Index that can't be modified.
             if(!IS_ATTRIBUTE(attributes, TPMA_NV, NO_DA))
                 return TPM_RCS_ATTRIBUTES + RC_NV_DefineSpace_publicInfo;
-#endif
-#ifdef TPM_NT_PIN_PASS
+            // Intentionally fall through.
         case TPM_NT_PIN_PASS:
             // AUTHWRITE must be CLEAR (see note above to TPM_NT_PIN_FAIL)
             if(IS_ATTRIBUTE(attributes, TPMA_NV, AUTHWRITE)
                || IS_ATTRIBUTE(attributes, TPMA_NV, GLOBALLOCK)
                || IS_ATTRIBUTE(attributes, TPMA_NV, WRITEDEFINE))
                 return TPM_RCS_ATTRIBUTES + RC_NV_DefineSpace_publicInfo;
-#endif  // this comes before break because PIN_FAIL falls through
             break;
+#endif
         default:
             break;
     }

@@ -388,9 +388,8 @@ CreateChecks(
                && !IS_ATTRIBUTE(attributes, TPMA_OBJECT, decrypt)
                && IS_ATTRIBUTE(attributes, TPMA_OBJECT, sensitiveDataOrigin))
                 result = TPM_RC_ATTRIBUTES;
-            // comment out the next line in order to prevent a fixedTPM derivation
-            // parent
-//            break;
+            // In order to prevent a fixedTPM derivation parent,
+            // intentionally fall through.
         case TPM_ALG_SYMCIPHER:
             // A restricted key symmetric key (SYMCIPHER and KEYEDHASH)
             // must have sensitiveDataOrigin SET unless it has fixedParent and
