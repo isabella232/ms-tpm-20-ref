@@ -76,7 +76,7 @@
 #   include "Manufacture_fp.h"
 #endif
 
-#ifdef CC_AC_Send
+#if CC_AC_Send
 #   include "AC_spt_fp.h"
 #endif // CC_AC_Send
 
