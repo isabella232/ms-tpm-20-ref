@@ -34,6 +34,7 @@
  */
 //** Includes, Defines, and Types
 #include    "Tpm.h"
+#include    "TpmSizeChecks_fp.h"
 #include    <stdio.h>
 #include    <assert.h>
 

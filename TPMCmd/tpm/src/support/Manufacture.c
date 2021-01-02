@@ -40,6 +40,7 @@
 //** Includes and Data Definitions
 #define MANUFACTURE_C
 #include "Tpm.h"
+#include "Manufacture_fp.h"
 #include "TpmSizeChecks_fp.h"
 
 //** Functions
