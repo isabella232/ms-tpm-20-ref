@@ -70,7 +70,6 @@
 #include "Handle_fp.h"
 #include "Power_fp.h"
 #include "Response_fp.h"
-#include "CommandDispatcher_fp.h"
 
 #if REMANUFACTURE
 #   include "Manufacture_fp.h"
