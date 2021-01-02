@@ -1,16 +1,16 @@
-load("//:tpm.bzl", "COPTS", "add_prototype_headers")
+load("//:tpm.bzl", "COPTS", "add_prototype_headers", "tpm_command")
 package(default_visibility = ["//Platform:__pkg__"])
 
-# Base headers that don't require inclusion in a particular order
+# Base headers used by the Platform and TPM code
 cc_library(
     name = "Headers",
     hdrs = [
         "tpm/include/TpmBuildSwitches.h",
         "tpm/include/CompilerDependencies.h",
-        "tpm/include/TpmProfile.h",
         "tpm/include/BaseTypes.h",
         "tpm/include/TPMB.h",
-        "tpm/include/ACT.h",
+        "tpm/include/MinMax.h",
+        "tpm/include/TpmProfile.h",
     ],
     copts = COPTS,
     includes = [
@@ -40,7 +40,6 @@ core_srcs = add_prototype_headers([
     "tpm/include/TableMarshalDefines.h",
 
     # Other headers included directly/indirectly by Tpm.h
-    "tpm/include/MinMax.h",
     "tpm/include/TpmAlgorithmDefines.h",
     "tpm/include/LibSupport.h",
     "tpm/include/GpMacros.h",
@@ -57,12 +56,12 @@ core_srcs = add_prototype_headers([
     "tpm/include/CryptRsa.h",
     "tpm/include/TpmError.h",
     "tpm/include/NV.h",
+    "tpm/include/ACT.h",
     "tpm/include/OIDs.h",
     "tpm/include/X509.h",
     "tpm/include/TpmASN1.h",
 
-    # Use a Google-specific InternalRoutines to allow for better build sharding.
-    "InternalRoutines.h",
+    "tpm/include/InternalRoutines.h",
     "tpm/include/SupportLibraryFunctionPrototypes_fp.h", # TODO: move?
     "tpm/include/CommandAttributeData.h", # TODO: why needed
 
@@ -138,58 +137,166 @@ core_srcs = add_prototype_headers([
     "tpm/src/main/SessionProcess.c",
     "tpm/src/command/Context/Context_spt.c",
     "tpm/src/command/Object/Object_spt.c",
+    "tpm/src/command/ClockTimer/ACT_spt.c",
+    "tpm/src/command/NVStorage/NV_spt.c",
 ])
 
 cc_library(
     name = "Core",
-    hdrs = [
-        "tpm/include/Tpm.h",
-    ],
+    hdrs = ["tpm/include/Tpm.h"],
     srcs = ossl_srcs + core_srcs,
     deps = [
         ":Headers",
-        "//Platform:Headers",
+        "//Platform",
         "@boringssl//:crypto",
     ],
     copts = COPTS,
 )
 
 cc_library(
-    name = "Manufacture",
-    hdrs = [
-        "tpm/include/prototypes/Manufacture_fp.h",
-    ],
-    srcs = ["tpm/src/support/Manufacture.c"] + add_prototype_headers([
-        "tpm/src/support/TpmSizeChecks.c",
-    ]),
-    deps = [
-        ":Core",
-    ],
+    name = "TpmASN1",
+    hdrs = ["tpm/include/prototypes/TpmASN1_fp.h"],
+    srcs = ["tpm/src/X509/TpmASN1.c"],
+    deps = [":Core"],
     copts = COPTS,
 )
 
 cc_library(
-    name = "hash_event",
-    hdrs = [
+    name = "X509_spt",
+    hdrs = ["tpm/include/prototypes/X509_spt_fp.h"],
+    srcs = ["tpm/src/X509/X509_spt.c"] + add_prototype_headers([
+        "tpm/src/X509/X509_ECC.c",
+        "tpm/src/X509/X509_RSA.c",
+    ]),
+    deps = [":Core", ":TpmASN1"],
+    copts = COPTS,
+)
 
+cc_library(
+    name = "_TPM_Hash",
+    hdrs = [
+        "tpm/include/prototypes/_TPM_Hash_Data_fp.h",
+        "tpm/include/prototypes/_TPM_Hash_End_fp.h",
+        "tpm/include/prototypes/_TPM_Hash_Start_fp.h",
     ],
     srcs = [
-
+        "tpm/src/events/_TPM_Hash_Data.c",
+        "tpm/src/events/_TPM_Hash_End.c",
+        "tpm/src/events/_TPM_Hash_Start.c",
     ],
-    deps = [
+    deps = [":Core"],
+    copts = COPTS,
+)
 
+cc_library(
+    name = "_TPM_Init",
+    hdrs = ["tpm/include/prototypes/_TPM_Init_fp.h"],
+    srcs = ["tpm/src/events/_TPM_Init.c"],
+    deps = [":Core"],
+    copts = COPTS,
+)
+
+cc_library(
+    name = "Manufacture",
+    hdrs = ["tpm/include/prototypes/Manufacture_fp.h"],
+    srcs = ["tpm/src/support/Manufacture.c"] + add_prototype_headers([
+        "tpm/src/support/TpmSizeChecks.c",
+    ]),
+    deps = [":Core"],
+    copts = COPTS,
+)
+
+cc_library(
+    name = "EncryptDecrypt",
+    hdrs = [
+        "tpm/include/prototypes/EncryptDecrypt_fp.h",
+        "tpm/include/prototypes/EncryptDecrypt2_fp.h",
     ],
+    srcs = [
+        "tpm/src/command/Symmetric/EncryptDecrypt.c",
+        "tpm/src/command/Symmetric/EncryptDecrypt2.c",
+    ] + add_prototype_headers([
+        "tpm/src/command/Symmetric/EncryptDecrypt_spt.c",
+    ]),
+    deps = [":Core"],
+    copts = COPTS,
+)
+
+tpm_command("Attestation/Attest_spt")
+
+# No AttachedComponent
+CMDS = [
+    # ALL
+    tpm_command("Startup/Startup"),
+    tpm_command("Startup/Shutdown"),
+    # ALL
+    tpm_command("Testing/SelfTest"),
+    tpm_command("Testing/IncrementalSelfTest"),
+    tpm_command("Testing/GetTestResult"),
+    # ALL
+    tpm_command("Session/StartAuthSession"),
+    tpm_command("Session/PolicyRestart"),
+    # ALL
+    tpm_command("Object/Create"),
+    tpm_command("Object/Load"),
+    tpm_command("Object/LoadExternal"),
+    tpm_command("Object/ReadPublic"),
+    tpm_command("Object/ActivateCredential"),
+    tpm_command("Object/MakeCredential"),
+    tpm_command("Object/Unseal"),
+    tpm_command("Object/ObjectChangeAuth"),
+    tpm_command("Object/CreateLoaded"),
+    # ALL
+    tpm_command("Duplication/Duplicate"),
+    tpm_command("Duplication/Rewrap"),
+    tpm_command("Duplication/Import"),
+    # No EC_Ephemeral
+    tpm_command("Asymmetric/RSA_Encrypt"),
+    tpm_command("Asymmetric/RSA_Decrypt"),
+    tpm_command("Asymmetric/ECDH_KeyGen"),
+    tpm_command("Asymmetric/ECDH_ZGen"),
+    tpm_command("Asymmetric/ECC_Parameters"),
+    tpm_command("Asymmetric/ZGen_2Phase"),
+    tpm_command("Asymmetric/ECC_Encrypt"),
+    tpm_command("Asymmetric/ECC_Decrypt"),
+    # Encrypt/Decrypt is weird, and no HMAC
+    ":EncryptDecrypt",
+    tpm_command("Symmetric/Hash"),
+    tpm_command("Symmetric/MAC"),
+    # ALL
+    tpm_command("Random/GetRandom"),
+    tpm_command("Random/StirRandom"),
+    # No HMAC_Start
+    tpm_command("HashHMAC/MAC_Start"),
+    tpm_command("HashHMAC/HashSequenceStart"),
+    tpm_command("HashHMAC/SequenceUpdate"),
+    tpm_command("HashHMAC/SequenceComplete"),
+    tpm_command("HashHMAC/EventSequenceComplete"),
+    # ALL, except Attest_spt handled above
+    tpm_command("Attestation/Certify", deps=[":Attest_spt"]),
+    tpm_command("Attestation/CertifyCreation", deps=[":Attest_spt"]),
+    tpm_command("Attestation/Quote", deps=[":Attest_spt"]),
+    tpm_command("Attestation/GetSessionAuditDigest", deps=[":Attest_spt"]),
+    tpm_command("Attestation/GetCommandAuditDigest", deps=[":Attest_spt"]),
+    tpm_command("Attestation/CertifyX509", deps=[
+        ":TpmASN1",
+        ":X509_spt",
+        ":Attest_spt",
+    ]),
+    tpm_command("Attestation/GetTime", deps=[":Attest_spt"]),
+    # ALL
+    tpm_command("Ecdaa/Commit"),
+]
+
+cc_library(
+    name = "ExecCommand",
+    hdrs = ["tpm/include/prototypes/ExecCommand_fp.h"],
+    srcs = ["tpm/src/main/ExecCommand.c"] + add_prototype_headers([
+        "tpm/include/CommandDispatchData.h",
+        "tpm/src/main/CommandDispatcher.c",
+    ]),
+    deps = CMDS + [":Core"],
     copts = COPTS,
 )
 
 
-
-# cc_library(
-#     name = "Tpm",
-#     hdrs = [],
-#     srcs = [],
-#     deps = [
-#         ":TpmProfile",
-#     ]
-#     copts = COPTS,
-# )

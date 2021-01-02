@@ -1,15 +1,15 @@
-// This file contains declarations for all the static global data used by this
-// Platform implementation. TODO(joerichey): document _PLATFORM_DATA_C_ trick
+// This file contains the instance data for the Platform module. It is collected
+// in this file so that the state of the module is easier to manage.
 
-#ifndef _GOOGLE_PLATFORM_DATA_H_
-#define _GOOGLE_PLATFORM_DATA_H_
+#ifndef _PLATFORM_DATA_H_
+#define _PLATFORM_DATA_H_
 
 #include <stdbool.h>
 #include <stdint.h>
 
 #include "TpmProfile.h" // For NV_MEMORY_SIZE
 
-#ifdef  _GOOGLE_PLATFORM_DATA_C_
+#ifdef  _PLATFORM_DATA_C_
 #define EXTERN
 #else
 #define EXTERN  extern
@@ -35,4 +35,4 @@ EXTERN bool s_NvCommitted;
 //** From Start.c
 EXTERN bool s_powerLost;
 
-#endif // _GOOGLE_PLATFORM_DATA_H_
+#endif // _PLATFORM_DATA_H_

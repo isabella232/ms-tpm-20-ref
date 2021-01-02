@@ -15,6 +15,12 @@
 //      FALSE(0)        if cancel flag is not set
 int _plat__IsCanceled(void);
 
+//***_plat__TimerReset()
+// This function sets current system clock time as t0 for counting TPM time.
+// This function is called at a power on event to reset the clock. When the clock
+// is reset, the indication that the clock was stopped is also set.
+void _plat__TimerReset(void);
+
 //***_plat__TimerRead()
 // This function provides access to the tick timer of the platform. The TPM code
 // uses this value to drive the TPM Clock.
@@ -66,8 +72,6 @@ void _plat__ClockAdjustRate(int adjust // IN: adjust number (positive/negative)
 int32_t _plat__GetEntropy(uint8_t *entropy, // output buffer
                           uint32_t amount   // amount requested
 );
-
-//** From LocalityPlat.c
 
 //***_plat__LocalityGet()
 // Get the most recent command locality in locality value form.
@@ -155,31 +159,6 @@ void _plat__NvMemoryMove(unsigned int sourceOffset, // IN: source offset
 //  non-0   NV write fail
 int _plat__NvCommit(void);
 
-//*** _plat__WasPowerLost()
-// Test whether power was lost before a _TPM_Init.
-//
-// This function will clear the "hardware" indication of power loss before
-// return. This means that there can only be one spot in the TPM code where this
-// value gets read. This method is used here as it is the most difficult to
-// manage in the TPM code and, if the hardware actually works this way, it is
-// hard to make it look like anything else. So, the burden is placed on the TPM
-// code rather than the platform code
-//  Return Type: int
-//      TRUE(1)         power was lost
-//      FALSE(0)        power was not lost
-int _plat__WasPowerLost();
-
-//***_plat__PhysicalPresenceAsserted()
-// Check if physical presence is signaled
-//  Return Type: int
-//      TRUE(1)         if physical presence is signaled
-//      FALSE(0)        if physical presence is not signaled
-int _plat__PhysicalPresenceAsserted();
-
-//***_plat__Fail()
-// This is the platform depended failure exit for the TPM.
-_Noreturn void _plat__Fail();
-
 //*** _plat__ACT_GetImplemented()
 // This function tests to see if an ACT is implemented. It is a belt and
 // suspenders function because the TPM should not be calling to manipulate an
@@ -218,5 +197,34 @@ void _plat__ACT_EnableTicks(int enable);
 //***_plat__ACT_Initialize()
 // This function initializes the ACT hardware and data structures
 int _plat__ACT_Initialize(void);
+
+//***_plat__Signal_PowerOn()
+// Signal platform power on
+int _plat__Signal_PowerOn(void);
+
+//*** _plat__WasPowerLost()
+// Test whether power was lost before a _TPM_Init.
+//
+// This function will clear the "hardware" indication of power loss before
+// return. This means that there can only be one spot in the TPM code where this
+// value gets read. This method is used here as it is the most difficult to
+// manage in the TPM code and, if the hardware actually works this way, it is
+// hard to make it look like anything else. So, the burden is placed on the TPM
+// code rather than the platform code
+//  Return Type: int
+//      TRUE(1)         power was lost
+//      FALSE(0)        power was not lost
+int _plat__WasPowerLost(void);
+
+//***_plat__PhysicalPresenceAsserted()
+// Check if physical presence is signaled
+//  Return Type: int
+//      TRUE(1)         if physical presence is signaled
+//      FALSE(0)        if physical presence is not signaled
+int _plat__PhysicalPresenceAsserted(void);
+
+//***_plat__Fail()
+// This is the platform depended failure exit for the TPM.
+_Noreturn void _plat__Fail(void);
 
 #endif // _PLATFORM_FP_H_

@@ -1,7 +1,6 @@
 // We don't implement any Authenticated Countdown Timers, so we just provide
 // empty stubs for all of the ACT platform functions.
-
-#include "Platform_fp.h"
+#include "Platform.h"
 
 int _plat__ACT_GetImplemented(uint32_t act) {
   (void)act;

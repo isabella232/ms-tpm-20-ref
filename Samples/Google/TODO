@@ -72,6 +72,14 @@ CryptEccData.c
   - Only thing that matters is the eccCurves array
   - Weird comma define
 
+TpmSizeChecks.c
+  - stdio and assert? why?
+  - What defines should control Inclusion
+  - is TpmSizeChecks_fp also gated?
+
+EC_Ephemeral
+  - In wrong directory, should be in Ecdaa
+
 #if 1
   - AC_spt.c (some simulated AC data), Are we using fake AC data in prod?
   - TableDirvenMarshal.c (for some unused function that's now a macro)
@@ -98,6 +106,7 @@ Textual Inclusion:
   - _X509_SPT_
   - GLOBAL_C
   - TPM_FAIL_C
+  - MANUFACTURE_C
 
 Tpm.h
   - TpmBuildSwitches.h

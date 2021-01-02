@@ -6,13 +6,7 @@
 // In this implementation, all the time values are measured in millisecond.
 // However, the precision of the clock functions may be implementation
 // dependent.
-#include "Clock.h"
-
-#include <stdint.h>
-
-#include "PlatformClock.h"
-#include "Data.h"
-#include "Platform_fp.h"
+#include "Platform.h"
 
 void _plat__TimerReset(void) {
   s_nanosPerClock = CLOCK_NOMINAL;

@@ -44,10 +44,13 @@ COPTS = [
     # "-DMAX_CONTEXT_SIZE=1360",
 ]
 
+def get_name(src):
+    return src.split("/")[-1][:-2]
+
 def get_prototype_header(src):
     if not src.endswith(".c"):
         return None # Source {} does not end with .c
-    name = src.split("/")[-1][:-2]
+    name = get_name(src)
     if name in ["CryptEccData", "PrimeData", "TableMarshalData", "Global"]:
         return None
     return "tpm/include/prototypes/{}_fp.h".format(name)
@@ -55,3 +58,17 @@ def get_prototype_header(src):
 def add_prototype_headers(srcs):
     hdrs = [get_prototype_header(src) for src in srcs]
     return srcs + [hdr for hdr in hdrs if hdr != None]
+
+def tpm_command(cmd, deps=[]):
+    src = "tpm/src/command/{}.c".format(cmd)
+    name = get_name(src)
+
+    native.cc_library(
+        name = name,
+        hdrs = [get_prototype_header(src)],
+        srcs = [src],
+        deps = deps + ["//:Core"],
+        copts = COPTS,
+    )
+
+    return ":" + name

@@ -29,7 +29,7 @@ bool _plat__SendRTM(uint32_t size, const uint8_t *data);
 // However, this time, the TPM will be in failure mode so ExecuteCommand will
 // simply build a failure response and return.
 // TODO(joerichey): Document this
-bool _plat__RunCommand(uint32_t requestSize,   // IN: command buffer size
+void _plat__RunCommand(uint32_t requestSize,   // IN: command buffer size
                        const uint8_t *request, // IN: command buffer
                        uint32_t *responseSize, // IN/OUT: response buffer size
                        uint8_t **response      // IN/OUT: response buffer

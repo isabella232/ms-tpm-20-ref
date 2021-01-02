@@ -1,6 +1,9 @@
 #ifndef _PLATFORM_CLOCK_H_
 #define _PLATFORM_CLOCK_H_
 
+// Must implement
+uint64_t _plat__RealTimeNs(void);
+
 // We use a nanosecond real clock, so CLOCK_NOMINAL is the number of ticks per
 // mS, which is 10^9 / 10^3 = 10^6 = 1,000,000.
 #define CLOCK_NOMINAL 1000000

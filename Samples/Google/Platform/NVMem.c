@@ -3,13 +3,10 @@
 // before/after invoking the _plat__* entry points. Thus, we can safely assume
 // that the memory is always available. We use enable/commit for dirty tracking
 // optimizations, but these methods will still always succeed.
+#include "Platform.h"
 
 #include <assert.h>
-#include <stdbool.h>
 #include <string.h>
-
-#include "Data.h"
-#include "Platform_fp.h"
 
 int _plat__NVEnable(void *platParameter) {
   (void)(platParameter);

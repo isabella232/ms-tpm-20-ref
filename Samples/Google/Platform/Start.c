@@ -17,26 +17,22 @@
 //  - Manufacture.c (TPM_Manufacture)
 //  - Hash.c (_plat__SendHCRTM + _TPM_Hash_{Start,Data,End})
 #include "Start.h"
+#include "Platform.h"
 
 #include <setjmp.h>
 
-#include "Clock.h"
-#include "Data.h"
-#include "Platform_fp.h"
-
-#include "Tpm.h"
 #include "ExecCommand_fp.h"
 #include "Manufacture_fp.h"
-// #include "_TPM_Hash_Data_fp.h"
-// #include "_TPM_Hash_End_fp.h"
-// #include "_TPM_Hash_Start_fp.h"
+#include "_TPM_Hash_Data_fp.h"
+#include "_TPM_Hash_End_fp.h"
+#include "_TPM_Hash_Start_fp.h"
 #include "_TPM_Init_fp.h"
 
 // Failure proccessing
 static jmp_buf s_jumpBuffer;
-noreturn void _plat__Fail(void) { longjmp(&s_jumpBuffer[0], 1); }
+_Noreturn void _plat__Fail(void) { longjmp(&s_jumpBuffer[0], 1); }
 
-bool _plat__Manufacture() {
+bool _plat__Manufacture(void) {
   if (setjmp(s_jumpBuffer) != 0) {
     return false;
   }
@@ -46,18 +42,8 @@ bool _plat__Manufacture() {
   return TPM_Manufacture(1) == 0;
 }
 
-int _plat__WasPowerLost() {
-  bool ret = s_powerLost;
-  s_powerLost = false;
-  return ret;
-}
-
-bool _plat__Reset() {
-  if (setjmp(s_jumpBuffer) != 0) {
-    return false;
-  }
-  s_powerLost = true;
-  _plat__TimerReset();
+bool _plat__Reset(void) {
+  _plat__Signal_PowerOn();
   _TPM_Init();
   return true;
 }
@@ -72,9 +58,8 @@ bool _plat__SendRTM(uint32_t size, const uint8_t *data) {
   return true;
 }
 
-bool _plat__RunCommand(uint32_t requestSize, const uint8_t *request,
+void _plat__RunCommand(uint32_t requestSize, const uint8_t *request,
                        uint32_t *responseSize, uint8_t **response) {
-  bool failure_mode = setjmp(s_jumpBuffer) != 0;
+  setjmp(s_jumpBuffer);
   ExecuteCommand(requestSize, (uint8_t *)request, responseSize, response);
-  return !failure_mode;
 }
