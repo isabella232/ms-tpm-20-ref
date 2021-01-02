@@ -33,6 +33,7 @@
  *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 #include "Tpm.h"
+#include "_TPM_Hash_End_fp.h"
 
 // This function is called to process a _TPM_Hash_End indication.
 LIB_EXPORT void

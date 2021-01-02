@@ -39,11 +39,6 @@
 #error "Should not be called"
 #endif
 
-// DRTM functions
-#include "_TPM_Hash_Start_fp.h"
-#include "_TPM_Hash_Data_fp.h"
-#include "_TPM_Hash_End_fp.h"
-
 // Internal subsystem functions
 #include "Object_fp.h"
 #include "Context_spt_fp.h"
